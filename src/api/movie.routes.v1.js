@@ -18,9 +18,9 @@ routes.get('/movies', function(req, res) {
 //
 // één movie ophalen op naam
 //
-routes.get('/movies/:name', function(req, res) {
+routes.get('/movies/:title', function(req, res) {
   res.contentType('application/json');
-  var query = { name: req.params.name };
+  var query = { title: req.params.title };
 
   Movie.find(query)
     .then((movie) => {
@@ -47,12 +47,12 @@ routes.post('/movies/new', function(req, res) {
 //
 // Verwijderen van een recept
 //
-routes.delete('/movies/:name', function(req, res) {
+routes.delete('/movies/:title', function(req, res) {
   res.contentType('application/json');
 
-  let movieName = req.params.name;
+  let movieTitle = req.params.title;
 
-  Movie.findOneAndRemove({name: movieName})
+  Movie.findOneAndRemove({title: movieTitle})
     .then((movie) => {
       res.status(200).json(movie);
     })
@@ -62,13 +62,13 @@ routes.delete('/movies/:name', function(req, res) {
 //
 // Wijzigen van een recept
 //
-  routes.put('/movies/:name/:edit', function(req, res) {
+  routes.put('/movies/:title', function(req, res) {
     res.contentType('application/json');
 
-    let movieName = req.params.name;
+    let movieTitle = req.params.title;
     let updatedMovie = req.body;
 
-    Movie.findOneAndUpdate({name: movieName}, updatedMovie)
+    Movie.findOneAndUpdate({title: movieTitle}, updatedMovie)
     .then((movie) => {
       res.status(200).json(movie);
     })
